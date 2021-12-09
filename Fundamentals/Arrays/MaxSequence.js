@@ -3,8 +3,8 @@ function maxSequence(arr) {
     let leftMostIndex = 0;
 
     for (let i = 0; i < arr.length; i++) {
-        currentEl = Number(arr[i]);
         let currentSequence = [currentEl];
+        currentEl = Number(arr[i]);
 
         for (let j = i + 1; j < arr.length; j++) {
             let nextEl = Number(arr[j]);
@@ -17,7 +17,6 @@ function maxSequence(arr) {
         }
 
         if (currentSequence.length > longestSequence.length) {
-            longestSequence = [];
             for (let j = 0; j < currentSequence.length; j++) {
                 longestSequence.push(currentSequence[j]);
             }

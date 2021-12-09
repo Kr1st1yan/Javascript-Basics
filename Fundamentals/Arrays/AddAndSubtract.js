@@ -3,7 +3,6 @@ function arrModifier(arr) {
     let inputSum = 0;
     let outputSum = 0;
 
-
     for (let index = 0; index < arr.length; index++) {
         let element = arr[index];
         inputSum += element;
@@ -21,4 +20,4 @@ function arrModifier(arr) {
     console.log(outputSum);
 }
 
-arrModifier([ 5, 14, 21, 59, 31 ]);
+arrModifier([5, 14, 21, 59, 31]);
