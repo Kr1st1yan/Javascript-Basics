@@ -1,24 +1,21 @@
 function printWinner(inputString) {
-    //fix the whole task
     let arrWithMaterials = inputString.split(" ");
     let finalMap = new Map();
     let keyFragmentsMap = new Map();
+    keyFragmentsMap.set("fragments", 0);
+    keyFragmentsMap.set("shards", 0);
+    keyFragmentsMap.set("motes", 0);
+    keyFragmentsMap.set("fragments", 0);
 
     for (let index = 0; index < arrWithMaterials.length; index += 2) {
         let name = arrWithMaterials[index + 1].toLowerCase();
         let value = Number(arrWithMaterials[index]);
 
         if (name === "motes" || name === "fragments" || name === "shards") {
-
-            if (!keyFragmentsMap.has(name)) {
-                keyFragmentsMap.set(name, value);
-            } else {
-                let times = keyFragmentsMap.get(name);
-                times += Number(value);
-                keyFragmentsMap.set(name, times);
-            }
+            let times = keyFragmentsMap.get(name);
+            times += Number(value);
+            keyFragmentsMap.set(name, times);
         } else {
-
             if (!finalMap.has(name)) {
                 finalMap.set(name, value);
             } else {
@@ -53,14 +50,17 @@ function printWinner(inputString) {
     }
 }
 
-
 function orderAndPrint(name, finalMap, keyFragmentsMap) {
-    let times = finalMap.get(name);
+    let times = keyFragmentsMap.get(name);
     times -= 250;
     keyFragmentsMap.set(name, times);
-    keyFragmentsMap = [...keyFragmentsMap.entries()].sort(
-        (a, b) => b[1] - a[1]
-    );
+    keyFragmentsMap = [...keyFragmentsMap.entries()].sort((a, b) => {
+        if (b[1] - a[1] === 0) {
+            return b[0].length - a[0].length;
+        } else {
+            return b[1] - a[1];
+        }
+    });
 
     finalMap = [...finalMap.entries()].sort();
 
@@ -74,7 +74,6 @@ function orderAndPrint(name, finalMap, keyFragmentsMap) {
 }
 
 printWinner(
-   '3 Motes 5 stones 5 Shards 6 leathers 255 fragments 7 Shards'
+    "123 silver 6 shards 8 shards 5 motes 9 fangs 75 motes 103 MOTES 8 Shards 86 Motes 7 stones 19 silver"
 );
 
-console.log();
